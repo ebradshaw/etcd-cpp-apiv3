@@ -147,7 +147,10 @@ if(CMAKE_CROSSCOMPILING)
         IMPORTED_LOCATION "${Protobuf_PROTOC_EXECUTABLE}")
 endif()
 
-find_package(gRPC QUIET)
+if(NOT grpc_FOUND)
+    find_package(gRPC QUIET)
+endif()
+    
 if(gRPC_FOUND AND TARGET gRPC::grpc)
     # When cross compiling we look for the native grpc_cpp_plugin
     if(CMAKE_CROSSCOMPILING)
